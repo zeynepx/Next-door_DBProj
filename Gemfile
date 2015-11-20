@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
+# Add Bootstrap gem
+gem 'bootstrap-sass', '~> 3.3.5'
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.3.18'
 # Use SCSS for stylesheets
@@ -35,6 +37,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'minitest-reporters', '1.0.5'
+  gem 'mini_backtrace', '0.1.3'
+  gem 'guard-minitest', '2.3.1'
 end
 
 group :development do
