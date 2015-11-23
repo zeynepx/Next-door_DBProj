@@ -1,1 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+xiaolong:
+  name: Xiaolong Jiang
+  email: xj370@nyu.edu
+  password_digest: <%= User.digest('xiaolong1') %>
