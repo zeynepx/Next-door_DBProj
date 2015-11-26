@@ -4,3 +4,25 @@ xiaolong:
   name: Xiaolong Jiang
   email: xj370@nyu.edu
   password_digest: <%= User.digest('xiaolong1') %>
+  admin: true
+
+
+
+xl:
+  name: xl
+  email: 375285054@qq.com
+  password_digest: <%= User.digest('xiaolong1') %>
+
+
+kobe:
+  name: kobe
+  email: kobe@nba.com
+  password_digest: <%= User.digest('xiaolong1') %>
+
+
+<% 200.times do |n| %>
+user_<%= n %>:
+  name:  <%= "User #{n}" %>
+  email: <%= "user-#{n}@nyu.edu" %>
+  password_digest: <%= User.digest('xiaolong1') %>
+<% end %>

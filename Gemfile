@@ -5,6 +5,12 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.4'
 # Add bcrypt gem, to make safety password digest
 gem 'bcrypt', '3.1.7'
+# Add some sample users
+gem 'faker', '1.4.2'
+
+gem 'will_paginate', '3.0.7'
+gem 'bootstrap-will_paginate', '0.0.10'
+
 # Add Bootstrap gem
 gem 'bootstrap-sass', '~> 3.3.5'
 # Use mysql as the database for Active Record
