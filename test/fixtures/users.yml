@@ -5,6 +5,7 @@ xiaolong:
   email: xj370@nyu.edu
   password_digest: <%= User.digest('xiaolong1') %>
   admin: true
+  profile: I'm a graduate student at NYU, and I'm major in computer science! :)
 
 
 
@@ -25,4 +26,5 @@ user_<%= n %>:
   name:  <%= "User #{n}" %>
   email: <%= "user-#{n}@nyu.edu" %>
   password_digest: <%= User.digest('xiaolong1') %>
+  profile: I'm a graduate student at NYU, and I'm major in computer science! :)
 <% end %>
