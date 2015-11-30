@@ -20,7 +20,7 @@ XJ:
   password_digest: <%= User.digest('xiaolong1') %>
 
 
-kobe:
+lana:
   name: kobe
   email: kobe@nba.com
   password_digest: <%= User.digest('xiaolong1') %>
