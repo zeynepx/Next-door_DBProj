@@ -1,12 +1,30 @@
 <% provide(:title, "Home") %>
-<div class="center">
-  <h1>My Hood</h1>
 
-  <p>Welcome, neighbors! How are you today? :)</p>
+<% if logged_in? %>
+    <div class="row">
+      <aside class="col-md-4">
+        <section class="user_info">
+          <%= render 'shared/user_info' %>
+        </section>
+        <section class="micropost_form">
+          <%= render 'shared/micropost_form' %>
+        </section>
+      </aside>
+      <div class="col-md-8">
+        <h3>Micropost Feed</h3>
+        <%= render 'shared/feed' %>
+      </div>
+    </div>
+<% else %>
+  <div class="center">
+    <h1>My Hood</h1>
+
+    <p>Welcome, neighbors! How are you today? :)</p>
 
 
-  <%= link_to "Sign up now!", new_path, class: "btn btn-lg btn-primary" %>
-  <body id="background">
+    <%= link_to "Sign up now!", new_path, class: "btn btn-lg btn-primary" %>
+    <body id="background">
 
-  </body>
-</div>
+    </body>
+  </div>
+<% end %>

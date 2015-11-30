@@ -14,6 +14,11 @@ xl:
   email: 375285054@qq.com
   password_digest: <%= User.digest('xiaolong1') %>
 
+XJ:
+  name: XJ
+  email: xljiangtju2010@gmail.com
+  password_digest: <%= User.digest('xiaolong1') %>
+
 
 kobe:
   name: kobe
@@ -21,7 +26,7 @@ kobe:
   password_digest: <%= User.digest('xiaolong1') %>
 
 
-<% 200.times do |n| %>
+<% 20.times do |n| %>
 user_<%= n %>:
   name:  <%= "User #{n}" %>
   email: <%= "user-#{n}@nyu.edu" %>

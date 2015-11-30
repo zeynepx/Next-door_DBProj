@@ -11,6 +11,10 @@ gem 'faker', '1.4.2'
 gem 'will_paginate', '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 
+gem 'carrierwave',             '0.10.0'
+gem 'mini_magick',             '3.8.0'
+gem 'fog',                     '1.36.0'
+
 # Add Bootstrap gem
 gem 'bootstrap-sass', '~> 3.3.5'
 # Use mysql as the database for Active Record
