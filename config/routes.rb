@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'friendship/create'
-
-  get 'friendship/destroy'
-
   root 'static_pages#home'
   get 'help' => 'static_pages#help'
   get 'about' => 'static_pages#about'
@@ -21,7 +17,6 @@ Rails.application.routes.draw do
   resources :microposts,          only: [:create, :destroy, :show]
   resources :relationships,       only: [:create, :destroy]
   resources :replies
-  resources :friendship
 
 
   # The priority is based upon order of creation: first created -> highest priority.
