@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :microposts, dependent: :destroy
+
   has_many :active_relationships,  class_name:  "Relationship",
            foreign_key: "follower_id",
            dependent:   :destroy
@@ -26,6 +27,9 @@ class User < ActiveRecord::Base
     BCrypt::Password.create(string, cost: cost)
   end
 
+
+  # Change here, so we can make neighbor feed and friends feed, block and neighborhood feed.
+  # BTW, how can we make sure that folling_ids is calling DB?
 
   def feed
     following_ids = "SELECT followed_id FROM relationships

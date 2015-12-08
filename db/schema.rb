@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151130011446) do
+ActiveRecord::Schema.define(version: 20151207193004) do
 
   create_table "microposts", force: :cascade do |t|
     t.text     "content",    limit: 65535
@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(version: 20151130011446) do
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
+  create_table "replies", force: :cascade do |t|
+    t.text     "content",      limit: 65535
+    t.integer  "user_id",      limit: 4
+    t.integer  "micropost_id", limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "replies", ["micropost_id"], name: "index_replies_on_micropost_id", using: :btree
+  add_index "replies", ["user_id"], name: "fk_rails_256e4b72c5", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.string   "email",           limit: 255
@@ -48,4 +59,6 @@ ActiveRecord::Schema.define(version: 20151130011446) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "microposts", "users"
+  add_foreign_key "replies", "microposts"
+  add_foreign_key "replies", "users"
 end
