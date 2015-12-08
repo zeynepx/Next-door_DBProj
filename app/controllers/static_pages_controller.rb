@@ -3,7 +3,8 @@ class StaticPagesController < ApplicationController
   def home
     if logged_in?
       @micropost  = current_user.microposts.build
-      @feed_items = current_user.feed.paginate(page: params[:page])
+      @neighbor_feeds = current_user.neighbor_feed.paginate(page: params[:page])
+      @friend_feeds = current_user.friend_feed.paginate(page: params[:page])
     end
   end
 

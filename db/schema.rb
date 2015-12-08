@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207193004) do
+ActiveRecord::Schema.define(version: 20151208020452) do
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer  "user1_id",   limit: 4
+    t.integer  "user2_id",   limit: 4
+    t.string   "status",     limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "friendships", ["user1_id", "user2_id"], name: "index_friendships_on_user1_id_and_user2_id", unique: true, using: :btree
+  add_index "friendships", ["user1_id"], name: "index_friendships_on_user1_id", using: :btree
+  add_index "friendships", ["user2_id"], name: "index_friendships_on_user2_id", using: :btree
 
   create_table "microposts", force: :cascade do |t|
     t.text     "content",    limit: 65535
