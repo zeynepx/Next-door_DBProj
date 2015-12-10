@@ -10,6 +10,18 @@ class User < ActiveRecord::Base
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
+  has_many :friendships
+  has_many :friends, -> { where(friendships: { status: "friend" }) }, through: :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, -> { where(friendships: { status: "friend" }) }, :through => :inverse_friendships, :source => :user
+
+  has_many :pending_friends, -> { where(friendships: { status: "not_friend" }) }, :through => :friendships, :source => :friend
+  has_many :requested_friendships, -> { where(friendships: { status: "not_friend"}) }, :through => :inverse_friendships, :source => :user
+
+ def both_side_friends
+   friends | inverse_friends
+ end
+
 
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: {maximum: 50}
