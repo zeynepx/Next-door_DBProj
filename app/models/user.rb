@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :microposts, dependent: :destroy
+
   has_many :active_relationships,  class_name:  "Relationship",
            foreign_key: "follower_id",
            dependent:   :destroy
@@ -8,6 +9,18 @@ class User < ActiveRecord::Base
            dependent:   :destroy
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+
+  has_many :friendships
+  has_many :friends, -> { where(friendships: { status: "friend" }) }, through: :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, -> { where(friendships: { status: "friend" }) }, :through => :inverse_friendships, :source => :user
+
+  has_many :pending_friends, -> { where(friendships: { status: "not_friend" }) }, :through => :friendships, :source => :friend
+  has_many :requested_friendships, -> { where(friendships: { status: "not_friend"}) }, :through => :inverse_friendships, :source => :user
+
+ def both_side_friends
+   friends | inverse_friends
+ end
 
 
   before_save { self.email = email.downcase }
@@ -26,6 +39,9 @@ class User < ActiveRecord::Base
     BCrypt::Password.create(string, cost: cost)
   end
 
+
+  # Change here, so we can make neighbor feed and friends feed, block and neighborhood feed.
+  # BTW, how can we make sure that folling_ids is calling DB?
 
   def feed
     following_ids = "SELECT followed_id FROM relationships

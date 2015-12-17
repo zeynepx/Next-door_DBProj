@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  # get 'friendships/create'
+  #
+  # get 'friendships/destroy'
+
   root 'static_pages#home'
   get 'help' => 'static_pages#help'
   get 'about' => 'static_pages#about'
@@ -14,10 +18,14 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :microposts,          only: [:create, :destroy]
+  resources :microposts,          only: [:create, :destroy, :show]
   resources :relationships,       only: [:create, :destroy]
-
-
+  resources :replies
+  resources :friendships do
+    member do
+      put 'friend_request'
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

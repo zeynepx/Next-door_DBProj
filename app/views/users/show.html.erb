@@ -1,10 +1,43 @@
 <% provide(:title, @user.name) %>
+<h2>Friends</h2>
+<ul>
+  <% for friend in @user.both_side_friends %>
+      <li>
+        <%=h friend.name %>
+        (<%= link_to "remove", friendship_path(:id => friend.id), :method => :delete %>)
+      </li>
+  <% end %>
+</ul>
+
+<% if @user == current_user %>
+
+<h2>Friend Requests</h2>
+<ul>
+  <% @user.requested_friendships.each do |request| %>
+      <li>
+        <%= request.email %>
+        <%= link_to "Accept", friendship_path(:id => request), :method => "put" %>
+        <%= link_to "Decline", friendship_path(:id => request), :method => :delete %>
+      </li>
+  <% end %>
+</ul>
+
+<% end %>
+
 <div class="row">
   <aside class="col-md-4">
     <section>
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
+        </br>
+        <% if @user.both_side_friends.include?(current_user) %>
+            <h4>Your Friend</h4>
+        <% elsif @user.pending_friends.include?(current_user) | current_user.pending_friends.include?(@user) %>
+            <h4>Pending Friend</h4>
+        <% else %>
+            <%= link_to "Add Friend", friendships_path(:friend_id => @user.id), :method => :post %>
+        <% end %>
       </h1>
     </section>
     <section class="stats">

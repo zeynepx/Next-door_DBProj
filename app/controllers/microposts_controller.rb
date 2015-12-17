@@ -20,6 +20,15 @@ class MicropostsController < ApplicationController
     redirect_to request.referrer || root_url
   end
 
+  def show
+    @micropost = Micropost.find(params[:id])
+    @replies = @micropost.replies.paginate(page: params[:page])
+    if logged_in?
+      @reply = @micropost.replies.build
+    end
+    get_micropost_id(@micropost)
+  end
+
   private
 
   def micropost_params

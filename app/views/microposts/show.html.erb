@@ -1,0 +1,18 @@
+<% provide(:title, @micropost.created_at) %>
+<h3><%= @micropost.content %></h3>
+<% if @micropost.replies.any? %>
+  <ol class="replies">
+    <%= render @replies %>
+  </ol>
+    <%= will_paginate @replies %>
+<% end %>
+<%= form_for(@reply, html: { multipart: true }) do |f| %>
+    <% @reply.user_id = current_user.id %>
+    <% @reply.micropost_id = @micropost.id %>
+    <div class="field">
+      <%= f.text_area :content, placeholder: "Compose a new reply..." %>
+    </div>
+    <%= f.submit "Post", class: "btn btn-primary" %>
+    <%= f.text_area :micropost_id, style: 'display:none' %>
+    <%= f.text_area :user_id, style: 'display:none' %>
+<% end %>

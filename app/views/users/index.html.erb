@@ -4,13 +4,23 @@
 <%= will_paginate %>
 
 <ul class="users">
+
+
+
+  <h3>Neighbors</h3>
   <% @users.each do |user| %>
       <li>
         <%= gravatar_for(user) %>
         <%= link_to user.name, user %>
         <%= user.profile %>
+        </br>
+
+        <% if not current_user.both_side_friends.include?(user) | current_user.pending_friends.include?(user) %>
+            <%= link_to "Add Friend", friendships_path(:friend_id => user.id), :method => :post %>
+        <% end %>
       </li>
   <% end %>
 </ul>
 
 <%= will_paginate %>
+

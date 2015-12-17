@@ -1,0 +1,9 @@
+<%  %>
+<li id="reply-<%= reply.id %>">
+  <%= link_to gravatar_for(reply.user), reply.user %>
+  <span class="user"><%= link_to reply.user.name, reply.user%></span>
+  <span class="content"><%= reply.content %></span>
+  <span class="timestamp">
+    <%= time_ago_in_words(reply.created_at) %>
+  </span>
+</li>

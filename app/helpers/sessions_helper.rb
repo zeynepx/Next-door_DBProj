@@ -5,6 +5,15 @@ module SessionsHelper
     session[:user_id] = user.id
   end
 
+  def get_micropost_id(micropost)
+    session[:micropost_id] = micropost.id
+  end
+
+  def current_micropost
+    @current_micropost ||= Micropost.find_by(id:session[:micropost_id])
+  end
+
+
   # Logs out the given user
   def log_out
     session.delete(:user_id)
@@ -34,5 +43,9 @@ module SessionsHelper
   def store_location
     session[:forwarding_url] = request.url if request.get?
   end
+
+  # def current_micropost
+  #   @current_micropost ||= Micropost.find_by(id:session[:micropost_id])
+  # end
 
 end
